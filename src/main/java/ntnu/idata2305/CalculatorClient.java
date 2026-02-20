@@ -50,8 +50,8 @@ public class CalculatorClient {
     int sends = config.getInt("maxClients", 10);
 
     try {
-      for(int i = 0; i < sends; i++){
-        simulatePacket(port);
+      for (int i = 0; i < sends; i++) {
+        new Thread(() -> simulatePacket(port)).start();
       }
     } catch (Exception e) {
       e.printStackTrace();
