@@ -3,8 +3,23 @@ package ntnu.idata2305;
 import java.io.*;
 import java.net.*;
 
+/**
+ * A single-threaded server that accepts a fixed number of client connections,
+ * performs basic arithmetic operations, and returns the result to each client.
+ * The server reads configuration from a properties file and simulates a processing delay.
+ */
 public class SingleThreadServer {
+  /**
+   * Indicates whether the server has started processing clients.
+   */
   public static boolean started = false;
+
+  /**
+   * Starts the single-threaded server, accepts client connections, processes arithmetic requests,
+   * and sends results back to clients.
+   *
+   * @param args Command-line arguments (not used).
+   */
   public static void main(String[] args) {
     Config config = new Config("project.properties");
 
@@ -66,6 +81,14 @@ public class SingleThreadServer {
     }
   }
 
+  /**
+   * Performs a basic arithmetic operation on two operands.
+   *
+   * @param a   The first operand.
+   * @param b   The second operand.
+   * @param op  The operator: 'A' (add), 'S' (subtract), 'M' (multiply), 'D' (divide).
+   * @return    The result of the operation, or 0 for invalid operator or division by zero.
+   */
   private static double calculate(double a, double b, char op) {
     switch (op) {
       case 'A': return a + b;
