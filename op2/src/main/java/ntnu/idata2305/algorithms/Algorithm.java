@@ -1,6 +1,6 @@
-package main.java.ntnu.idata2305.algorithms;
+package ntnu.idata2305.algorithms;
 
-import main.java.ntnu.idata2305.CpuProcess;
+import ntnu.idata2305.CpuProcess;
 
 import java.util.List;
 

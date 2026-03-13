@@ -1,4 +1,4 @@
-package main.java.ntnu.idata2305;
+package ntnu.idata2305;
 
 public record CpuProcess(String processId, int arrivalTime, int burstTime) {
 
