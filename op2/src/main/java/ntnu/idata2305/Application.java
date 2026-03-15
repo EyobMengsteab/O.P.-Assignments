@@ -75,13 +75,13 @@ public class Application {
 
     printInputTable(processes);
 
-    System.out.println("\n" + CYAN + ">>> Running FCFS" + RESET);
+    System.out.println("\n" + GREEN + ">>> Running FCFS" + RESET);
     fcfs.run(processes);
 
     System.out.println("\n" + GREEN + ">>> Running SJF (Non-preemptive)" + RESET);
     sjf.run(processes);
 
-    System.out.println("\n" + RED + ">>> Running SRTF (Preemptive)" + RESET);
+    System.out.println("\n" + GREEN + ">>> Running SRTF (Preemptive)" + RESET);
     srtf.run(processes);
 
     System.out.println(BLUE + "\nFinished " + title + RESET);
