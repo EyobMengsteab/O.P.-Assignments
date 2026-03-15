@@ -5,21 +5,21 @@ import ntnu.idata2305.algorithms.FCFS;
 import ntnu.idata2305.algorithms.SJF;
 import ntnu.idata2305.algorithms.SRTF;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Application {
 
-  private static final String RESET = "\u001B[0m";
-  private static final String GREEN = "\u001B[32m";
-  private static final String YELLOW = "\u001B[33m";
-  private static final String BLUE = "\u001B[34m";
+  // ANSI Colors
+  public static final String RESET = "\u001B[0m";
+  public static final String RED = "\u001B[31m";
+  public static final String GREEN = "\u001B[32m";
+  public static final String YELLOW = "\u001B[33m";
+  public static final String BLUE = "\u001B[34m";
+  public static final String PURPLE = "\u001B[35m";
+  public static final String CYAN = "\u001B[36m";
 
   public static void main(String[] args) {
-    // Case 1: All Processes Arrive at Time 0
+
     List<CpuProcess> case1Processes = List.of(
       new CpuProcess("P1", 0, 8),
       new CpuProcess("P2", 0, 4),
@@ -28,7 +28,6 @@ public class Application {
       new CpuProcess("P5", 0, 3)
     );
 
-    // Case 2: One Long Process Followed by Short Processes
     List<CpuProcess> case2Processes = List.of(
       new CpuProcess("P1", 0, 20),
       new CpuProcess("P2", 1, 2),
@@ -37,7 +36,6 @@ public class Application {
       new CpuProcess("P5", 4, 3)
     );
 
-    // Case 3: Continuous Arrival of Short Processes
     List<CpuProcess> case3Processes = List.of(
       new CpuProcess("P1", 0, 20),
       new CpuProcess("P2", 1, 2),
@@ -51,75 +49,55 @@ public class Application {
     Algorithm sjf = new SJF();
     Algorithm srtf = new SRTF();
 
-    System.out.println("=================================================");
-    System.out.println("CPU SCHEDULING COMPARISON TABLE");
-    System.out.println("=================================================");
-    System.out.printf("%-8s %-10s %-10s %-10s%n", "Case", "Algorithm", "Avg WT", "Avg TAT");
-    System.out.println("-------------------------------------------------");
+    runCase("CASE 1 - All Processes Arrive at Time 0",
+      "Compare burst ordering behavior",
+      case1Processes, fcfs, sjf, srtf);
 
-    printRow("Case 1", "FCFS", fcfs, case1Processes);
-    printRow("Case 1", "SJF",  sjf,  case1Processes);
-    printRow("Case 1", "SRTF", srtf, case1Processes);
+    runCase("CASE 2 - One Long Process Followed by Short Processes",
+      "Demonstrates convoy effect",
+      case2Processes, fcfs, sjf, srtf);
 
-    System.out.println("-------------------------------------------------");
-
-    printRow("Case 2", "FCFS", fcfs, case2Processes);
-    printRow("Case 2", "SJF",  sjf,  case2Processes);
-    printRow("Case 2", "SRTF", srtf, case2Processes);
-
-    System.out.println("-------------------------------------------------");
-
-    printRow("Case 3", "FCFS", fcfs, case3Processes);
-    printRow("Case 3", "SJF",  sjf,  case3Processes);
-    printRow("Case 3", "SRTF", srtf, case3Processes);
-
-    System.out.println("-------------------------------------------------");
+    runCase("CASE 3 - Continuous Arrival of Short Processes",
+      "Shows starvation risk",
+      case3Processes, fcfs, sjf, srtf);
   }
 
-  private static void printRow(String caseName, String algorithmName,
-                               Algorithm algorithm, List<CpuProcess> processes) {
-    Result result = runAndExtractResults(algorithm, processes);
+  private static void runCase(String title, String purpose,
+                              List<CpuProcess> processes,
+                              Algorithm fcfs, Algorithm sjf, Algorithm srtf) {
 
-    String color = switch (caseName) {
-      case "Case 1" -> GREEN;
-      case "Case 2" -> YELLOW;
-      case "Case 3" -> BLUE;
-      default -> RESET;
-    };
+    printDivider();
 
+    System.out.println(PURPLE + title + RESET);
+    System.out.println(YELLOW + "Purpose: " + purpose + RESET);
 
-    System.out.printf(color + "%-8s %-10s %-10.2f %-10.2f" + RESET + "%n",
-      caseName, algorithmName, result.avgWT(), result.avgTAT());
+    printDivider();
+
+    printInputTable(processes);
+
+    System.out.println("\n" + CYAN + ">>> Running FCFS" + RESET);
+    fcfs.run(processes);
+
+    System.out.println("\n" + GREEN + ">>> Running SJF (Non-preemptive)" + RESET);
+    sjf.run(processes);
+
+    System.out.println("\n" + RED + ">>> Running SRTF (Preemptive)" + RESET);
+    srtf.run(processes);
+
+    System.out.println(BLUE + "\nFinished " + title + RESET);
   }
 
-  private static Result runAndExtractResults(Algorithm algorithm, List<CpuProcess> processes) {
-    PrintStream originalOut = System.out;
-    ByteArrayOutputStream capturedOutput = new ByteArrayOutputStream();
-    PrintStream tempOut = new PrintStream(capturedOutput);
+  private static void printInputTable(List<CpuProcess> processes) {
+    System.out.println(BLUE + "\nInput Processes:" + RESET);
+    System.out.println("Process ID | Arrival | Burst");
 
-    System.setOut(tempOut);
-    algorithm.run(processes);
-    System.out.flush();
-    System.setOut(originalOut);
-
-    String output = capturedOutput.toString();
-
-    double avgTAT = extractValue(output, "Average Turnaround Time:\\s*([0-9]+\\.?[0-9]*)");
-    double avgWT = extractValue(output, "Average Waiting Time:\\s*([0-9]+\\.?[0-9]*)");
-
-    return new Result(avgWT, avgTAT);
-  }
-
-  private static double extractValue(String text, String regex) {
-    Pattern pattern = Pattern.compile(regex);
-    Matcher matcher = pattern.matcher(text);
-
-    if (matcher.find()) {
-      return Double.parseDouble(matcher.group(1));
+    for (CpuProcess p : processes) {
+      System.out.printf("%-10s | %-7d | %-5d%n",
+        p.processId(), p.arrivalTime(), p.burstTime());
     }
-
-    throw new IllegalStateException("Could not find value using pattern: " + regex);
   }
 
-  private record Result(double avgWT, double avgTAT) {}
+  private static void printDivider() {
+    System.out.println(BLUE + "============================================================" + RESET);
+  }
 }
