@@ -2,6 +2,8 @@ package ntnu.idata2305;
 
 import ntnu.idata2305.algorithms.Algorithm;
 import ntnu.idata2305.algorithms.FCFS;
+import ntnu.idata2305.algorithms.SRTF;
+import ntnu.idata2305.algorithms.SJF;
 
 import java.util.List;
 
@@ -38,6 +40,8 @@ public class Application {
 
     // --- 2. Instantiate our FCFS algorithm ---
     Algorithm fcfs = new FCFS();
+    Algorithm sjf = new SJF();
+    Algorithm srtf = new SRTF();
 
     // --- 3. Run all test cases for FCFS ---
     System.out.println("========== TEST CASE 1 ==========\n");
@@ -48,5 +52,28 @@ public class Application {
 
     System.out.println("========== TEST CASE 3 ==========\n");
     fcfs.run(case3Processes);
+
+
+    // --- 4. Run all test cases for SJF ---
+    System.out.println("========== TEST CASE 1 ==========\n");
+    sjf.run(case1Processes);
+
+    System.out.println("========== TEST CASE 2 ==========\n");
+    sjf.run(case2Processes);
+
+    System.out.println("========== TEST CASE 3 ==========\n");
+    sjf.run(case3Processes);
+
+
+    // --- 5. Run all test cases for SRTF ---
+    System.out.println("========== TEST CASE 1 ==========\n");
+    srtf.run(case1Processes);
+
+    System.out.println("========== TEST CASE 2 ==========\n");
+    srtf.run(case2Processes);
+
+    System.out.println("========== TEST CASE 3 ==========\n");
+    srtf.run(case3Processes);
+
   }
 }
