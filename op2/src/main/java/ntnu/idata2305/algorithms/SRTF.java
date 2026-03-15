@@ -8,32 +8,6 @@ import java.util.List;
 
 public class SRTF implements Algorithm {
 
-  private class ProcessState {
-
-    CpuProcess process;
-    int remainingTime;
-    int completionTime;
-    int turnaroundTime;
-    int waitingTime;
-
-    public ProcessState(CpuProcess process) {
-      this.process = process;
-      this.remainingTime = process.burstTime();
-    }
-
-    public String id() {
-      return process.processId();
-    }
-
-    public int arrival() {
-      return process.arrivalTime();
-    }
-
-    public int burst() {
-      return process.burstTime();
-    }
-  }
-
   @Override
   public void run(List<CpuProcess> processes) {
 
@@ -127,7 +101,7 @@ public class SRTF implements Algorithm {
 
     times.add(0);
 
-    String prev = gantt.get(0);
+    String prev = gantt.getFirst();
     segments.add(prev);
 
     for (int i = 1; i < gantt.size(); i++) {
