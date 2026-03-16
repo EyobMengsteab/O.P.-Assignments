@@ -7,6 +7,12 @@ import ntnu.idata2305.algorithms.SRTF;
 
 import java.util.List;
 
+/**
+ * Main application class to run CPU scheduling algorithm comparisons.
+ * It defines several test cases with different process arrival and burst time patterns,
+ * and runs FCFS, SJF, and SRTF algorithms on each case while printing results in a formatted manner.
+ */
+
 public class Application {
 
   // ANSI Colors
@@ -19,6 +25,8 @@ public class Application {
   public static final String CYAN = "\u001B[36m";
 
   public static void main(String[] args) {
+
+    // Define test cases with different process patterns
 
     List<CpuProcess> case1Processes = List.of(
       new CpuProcess("P1", 0, 8),
@@ -45,6 +53,7 @@ public class Application {
       new CpuProcess("P6", 5, 2)
     );
 
+    // Create algorithm instances
     Algorithm fcfs = new FCFS();
     Algorithm sjf = new SJF();
     Algorithm srtf = new SRTF();
@@ -62,6 +71,12 @@ public class Application {
       case3Processes, fcfs, sjf, srtf);
   }
 
+  /**
+   * Helper method to run a test case
+   * with given processes and algorithms.
+   * It prints the case title, purpose, input processes,
+   * and runs each algorithm while printing results.
+   */
   private static void runCase(String title, String purpose,
                               List<CpuProcess> processes,
                               Algorithm fcfs, Algorithm sjf, Algorithm srtf) {
@@ -87,6 +102,10 @@ public class Application {
     System.out.println(BLUE + "\nFinished " + title + RESET);
   }
 
+  /**
+   * Helper method to print the input processes in a formatted table.
+   * It shows the process ID, arrival time, and burst time for each process.
+   */
   private static void printInputTable(List<CpuProcess> processes) {
     System.out.println(BLUE + "\nInput Processes:" + RESET);
     System.out.println("Process ID | Arrival | Burst");
@@ -97,6 +116,10 @@ public class Application {
     }
   }
 
+  /**
+   * Helper method to print a divider line
+   * for better readability.
+   */
   private static void printDivider() {
     System.out.println(BLUE + "============================================================" + RESET);
   }
