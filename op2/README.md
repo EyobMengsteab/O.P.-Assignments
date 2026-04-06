@@ -1,3 +1,16 @@
+# Assignment 2: CPU Scheduling Algorithms
+
+To run the application:
+
+Head to the folder op2 > main > java > ntnu > idata2305 > Application.java
+
+Right click the class and select "Run Application.main()"
+
+If you’re unable to run the program, try marking the Java folder as a Source Root.
+
+You can do this by navigating to op2 → main → java, then right-click the java folder,
+select “Mark Directory As”, and click “Source Root.”
+
 # Part B – Test Cases
 
 ## Case 1 – All Processes Arrive at Time 0
