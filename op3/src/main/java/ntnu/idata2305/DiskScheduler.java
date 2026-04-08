@@ -40,5 +40,8 @@ public class DiskScheduler {
         int initialHead3 = 15;
         int[] requests3 = {10, 12, 14, 16, 100, 102};
 
+        RequestResult fcfsResult3 = Algorithms.runFCFS(initialHead3, requests3);
+        fcfsResult3.printResult("FCFS");
+
     }
 }
