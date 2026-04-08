@@ -23,6 +23,9 @@ public class DiskScheduler {
         RequestResult fcfsResult1 = Algorithms.runFCFS(initialHead1, requests1);
         fcfsResult1.printResult("FCFS");
 
+        RequestResult sstfResult1 = Algorithms.runSSTF(initialHead1, requests1);
+        sstfResult1.printResult("SSTF");
+
         // ==========================================
         // CASE 2: Clustered Requests
         // ==========================================
@@ -33,6 +36,9 @@ public class DiskScheduler {
         RequestResult fcfsResult2 = Algorithms.runFCFS(initialHead2, requests2);
         fcfsResult2.printResult("FCFS");
 
+        RequestResult sstfResult2 = Algorithms.runSSTF(initialHead2, requests2);
+        sstfResult2.printResult("SSTF");
+
         // ==========================================
         // CASE 3: Fairness Challenge
         // ==========================================
@@ -42,6 +48,9 @@ public class DiskScheduler {
 
         RequestResult fcfsResult3 = Algorithms.runFCFS(initialHead3, requests3);
         fcfsResult3.printResult("FCFS");
+
+        RequestResult sstfResult3 = Algorithms.runSSTF(initialHead3, requests3);
+        sstfResult3.printResult("SSTF");
 
     }
 }
