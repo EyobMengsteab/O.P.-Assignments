@@ -1,4 +1,4 @@
-package ntnu.idata2305;
+package ntnu.idata2305.types;
 
 
 import java.util.ArrayList;
@@ -12,6 +12,8 @@ public class RequestResult {
     public List<Integer> serviceOrder;
     public int totalHeadMovement;
     public double averageSeekDistance;
+    public String algorithmName;
+
 
     /**
      * Constructs a new RequestResult with an empty service order and zeroed metrics.
@@ -20,13 +22,13 @@ public class RequestResult {
         this.serviceOrder = new ArrayList<>();
         this.totalHeadMovement = 0;
         this.averageSeekDistance = 0.0;
+        this.algorithmName = "";
     }
 
     /**
      * Prints the algorithm's results to the console in a formatted manner.
-     * @param algorithmName The name of the algorithm that produced these results (e.g., "FCFS").
      */
-    public void printResult(String algorithmName) {
+    public void printResult() {
         System.out.println("Algorithm: " + algorithmName);
 
         System.out.print("Service Order: ");
