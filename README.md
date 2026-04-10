@@ -27,8 +27,12 @@ select “Mark Directory As”, and click “Source Root.”
 
 To run the application:
 
-Head to the folder op3 > src > java > ntnu > idata2305 > DiskScheduler.java
+Head to the folder op3 > src > main > java > ntnu > idata2305 > DiskScheduler.java
 
 Right click the class and select "Run DiskScheduler.main()"
+
+If you get an error due to duplicate class names,
+unmark all previously marked source root folders.
+Then, right-click the java folder under op3 and mark only that folder as the source root.
 
 > **NOTE** Some Git commits from earlier versions were not included in the final project. This specifically applies to the implementations of both the FCFS and SSTF algorithms, which were developed by Eyob and Nathaniel, respectively, as outlined in the Individual Contribution section of our report.
