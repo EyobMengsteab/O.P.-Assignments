@@ -31,4 +31,4 @@ Head to the folder op3 > src > java > ntnu > idata2305 > DiskScheduler.java
 
 Right click the class and select "Run DiskScheduler.main()"
 
-> **NOTE** Some Git commits from earlier versions were not included in the final project. This applies to the implementations of both the FCFS algorithm and the SSTF algorithm.
+> **NOTE** Some Git commits from earlier versions were not included in the final project. This specifically applies to the implementations of both the FCFS and SSTF algorithms, which were developed by Eyob and Nathaniel, respectively, as outlined in the Individual Contribution section of our report.
